@@ -1,7 +1,12 @@
-﻿import styled from 'styled-components';
+﻿// esse arquivo define stylo de texto somemte para esse componente
+import styled from 'styled-components';
 
 export const Title = styled.h1`
-  font-size: 24px;
-  color: #7159c1;
-  font-family: Arial, Helvetica, sans-serif;
-  `;
+   color: #fff;
+ `;
+
+/** exemplo aplicando stylo com validacao em funcao de props
+export const Title = styled.h1`
+  color: ${props => props.error ? 'red' : '#7159c1'};
+ `;
+*/
