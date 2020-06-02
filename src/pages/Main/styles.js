@@ -1,9 +1,106 @@
 ﻿// esse arquivo define stylo de texto somemte para esse componente
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
-export const Title = styled.h1`
-   color: #fff;
+export const Container = styled.div`
+       max-width: 700px;
+       background: #fff;
+       border-radius: 4px;
+       box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /** uma caixa com 20px de altura */
+       padding: 30px;   /** 30px espacmento interno */
+       margin: 80px auto; /** laterais centralizadas com auto */
+
+       h1{
+           font-size: 20px;
+           display: flex;
+           flex-direction: row;
+           align-items:center; /** centraliza elementos */
+
+           svg{
+               margin-right: 10px; /** distanciando o texto do icone */
+           }
+       }
  `;
+
+export const Form = styled.form`
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row; /** posiciona um elemento ao lado do outro */
+
+    input {
+        flex: 1; /** ocupa todo espaco possivel */
+        border: 1px solid #eee;
+        padding: 10px 15px; /** 10 em cima e em baixo, 15 esq. e dir  */
+        border-radius: 4px;
+        font-size: 16px;
+    }
+ `;
+
+const rotate = keyframes` /** configura uma animação */
+     from {
+         transform: rotate(0deg);
+     }
+     to {
+         transform: rotate(360deg);
+     }
+`;
+
+
+export const SubmitButton = styled.button.attrs(props => ({
+    type: 'submit',  // passando propriedade do componente para o css
+    disabled: props.loading,
+}))`
+background: #7159c1;
+border: 0;
+padding: 0 15px;
+margin-left: 10px;
+border-radius: 4px;
+
+/** todo conteudo do botao alinhando ao centro */
+display: flex;
+justify-content: center;
+align-items: center;
+
+&[disabled]{
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+${props =>
+    props.loading && /** se loading = true, aplica a animação do css */
+     css`
+        svg {
+            animation: ${rotate} 2s linear infinite;
+        }
+  `}
+`;
+
+export const List = styled.ul`
+    list-style: nome;
+    margin-top: 30px;
+
+    li {
+        padding: 15px 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        & + li { /** aplica o stylo (borda) em todos os itens menos no primeiro item */
+             border-top: 1px solid #eee;
+        }
+
+        a{
+            color: #7159c1;
+            text-decoration: none;
+        }
+    }
+`;
+
+
+
+
+
+
 
 /** exemplo aplicando stylo com validacao em funcao de props
 export const Title = styled.h1`
