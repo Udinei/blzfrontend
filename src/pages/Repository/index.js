@@ -1,9 +1,22 @@
 ﻿import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import api from '../../services/api';
+import Container from '../../components/Container';
+
+import { Loading, Owner } from './styles';
 
 // import { Container } from './styles';
 
 export default class Repository extends Component {
+    // validando propriedades criadas pelo react, todas são requeridas
+    static propTypes = {
+        match: PropTypes.shape({
+            params: PropTypes.shape({
+                repository: PropTypes.string,
+            }),
+        }).isRequired,
+    };
 
     state = {
         repository: {},
@@ -40,8 +53,26 @@ export default class Repository extends Component {
     }
 
     render(){
-       // const { repository, issues, loading } = this.state;
-        return <h1>Repository</h1>;
+        const { repository, issues, loading } = this.state;
+
+
+
+       if(loading){
+           console.log('teste ' + loading);
+           return <Loading>Carregando</Loading>
+
+           //setTimeout(900);
+       }
+
+
+        return <Container>
+            <Owner>
+                <Link to="/">Voltar aos repositórios</Link>
+                <img src={repository.owner.avatar_url} alt={repository.owner.login} />
+                <h1>{repository.name}</h1>
+                <p>{repository.description}</p>
+            </Owner>
+            </Container>;
     }
 }
 
